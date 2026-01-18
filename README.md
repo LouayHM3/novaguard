@@ -8,7 +8,7 @@
 
 ---
 
-## 📖 Table des Matières
+##  Table des Matières
 
 - [Vue d'ensemble](#-vue-densemble)
 - [Fonctionnalités](#-fonctionnalités)
@@ -22,7 +22,7 @@
 
 ---
 
-## 🎯 Vue d'ensemble
+##  Vue d'ensemble
 
 NovaGuard AI remplace les solutions WAF traditionnelles comme ModSecurity en offrant :
 
@@ -34,7 +34,7 @@ NovaGuard AI remplace les solutions WAF traditionnelles comme ModSecurity en off
 
 ---
 
-## ✨ Fonctionnalités
+##  Fonctionnalités
 
 ### Protection en Temps Réel
 
@@ -46,22 +46,22 @@ NovaGuard AI remplace les solutions WAF traditionnelles comme ModSecurity en off
 
 ### Intelligence Artificielle
 
-- 🤖 Détection d'anomalies (Isolation Forest, K-means)
-- 🎯 Classification des attaques (Random Forest, XGBoost)
-- 📊 Scoring et priorisation des menaces
-- 🔍 Analyse NLP des logs
+- Détection d'anomalies (Isolation Forest, K-means)
+-  Classification des attaques (Random Forest, XGBoost)
+-  Scoring et priorisation des menaces
+-  Analyse NLP des logs
 
 ### Gestion et Monitoring
 
-- 📈 Dashboard interactif (Angular)
-- 🔧 Création de règles personnalisées
-- 📝 Logs détaillés
-- 🔗 Intégration Splunk UF
-- 📊 Métriques de performance
+-  Dashboard interactif (Angular)
+-  Création de règles personnalisées
+-  Logs détaillés
+-  Intégration Splunk UF
+-  Métriques de performance
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 ┌─────────────────────────────────────┐
@@ -79,7 +79,7 @@ NovaGuard AI remplace les solutions WAF traditionnelles comme ModSecurity en off
 
 ---
 
-## 🚀 Installation
+##  Installation
 
 ### Prérequis
 
@@ -135,7 +135,7 @@ alembic upgrade head
 
 ---
 
-## 💻 Utilisation
+##  Utilisation
 
 ### Démarrage Rapide
 
@@ -174,7 +174,7 @@ npm test
 
 ---
 
-## 🛠️ Technologies
+##  Technologies
 
 ### Backend
 
@@ -203,7 +203,7 @@ npm test
 
 ---
 
-## 👨‍💻 Développement
+##  Développement
 
 ### Structure du Projet
 
@@ -244,7 +244,7 @@ novaguard/
 
 ---
 
-## 🤝 Contribution
+##  Contribution
 
 Les contributions sont les bienvenues ! Consultez [CONTRIBUTING.md](CONTRIBUTING.md) pour les directives.
 
@@ -258,7 +258,7 @@ Les contributions sont les bienvenues ! Consultez [CONTRIBUTING.md](CONTRIBUTING
 
 ---
 
-## 📊 Métriques de Performance
+##  Métriques de Performance
 
 Objectifs de performance :
 
@@ -270,13 +270,13 @@ Objectifs de performance :
 
 ---
 
-## 📄 Licence
+## Licence
 
 Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
 ---
 
-## 👥 Équipe
+##  Équipe
 
 - **Chef de Projet** : PRODOPS-Pole Sécurité
 - **Support Technique** : 459.Prodops-NSS.Operations
@@ -285,7 +285,7 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 
 
-## 🙏 Remerciements
+## Remerciements
 
 - Sopra Steria Group pour le sponsoring
 - Communauté open-source
@@ -294,4 +294,5 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 ---
 
 **Développé avec ❤️ par l'équipe NovaGuard**
+
 
