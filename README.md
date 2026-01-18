@@ -1,300 +1,301 @@
-NovaGuard AI - Next-Generation Intelligent WAF
+# 🛡️ NovaGuard AI - Web Application Firewall Intelligent
 
-An AI-powered Web Application Firewall designed to replace ModSecurity with intelligent threat detection and automated response capabilities.
-📋 Table of Contents
-Overview
-Key Features
-Architecture
-Tech Stack
-Project Structure
-Getting Started
-Development Roadmap
-Documentation
-Contributing
-License
-🎯 Overview
-NovaGuard AI is a next-generation Web Application Firewall that leverages artificial intelligence and machine learning to provide advanced threat detection, minimize false positives, and automate security responses. Built to integrate seamlessly with Apache servers and enterprise infrastructure.
-Why NovaGuard?
-🤖 AI-Powered Detection: Machine learning models for real-time anomaly detection
-🎯 Reduced False Positives: Intelligent filtering to minimize alert fatigue
-⚡ Real-Time Response: Automated threat mitigation and response
-📊 Advanced Dashboard: Interactive UI for monitoring and rule management
-🔗 Enterprise Integration: Native support for Splunk, Apache, and OKD/Kubernetes
-✨ Key Features
-Core Capabilities
-Intelligent Threat Detection
-SQL Injection detection
-XSS (Cross-Site Scripting) prevention
-Path Traversal protection
-DDoS mitigation with rate limiting
-Anomaly detection using unsupervised learning
-AI/ML Models
-Anomaly detection (Isolation Forest, K-means clustering)
-Attack classification (Random Forest, XGBoost)
-Threat prioritization and scoring
-NLP-based log analysis
-Automation
-Automated response to critical threats
-Dynamic rule generation
-Self-learning capabilities
-Adaptive security policies
-Management & Monitoring
-Real-time dashboard (Angular-based)
-Custom rule creation interface
-Comprehensive logging
-Splunk UF integration
-Performance metrics and analytics
-🏗️ Architecture
-┌─────────────────────────────────────────────────┐
-│              OKD Cluster (Kubernetes)           │
-├─────────────────────────────────────────────────┤
-│                                                 │
-│  ┌──────────────┐  ┌──────────────┐            │
-│  │   Apache     │  │  FastAPI     │            │
-│  │  + mod_waf   │→ │   Backend    │            │
-│  └──────────────┘  └──────┬───────┘            │
-│                           │                     │
-│  ┌──────────────┐  ┌──────▼───────┐            │
-│  │   Angular    │  │  PostgreSQL  │            │
-│  │  Dashboard   │  │   Database   │            │
-│  └──────────────┘  └──────────────┘            │
-│                                                 │
-│  ┌──────────────────────────────────┐          │
-│  │    AI/ML Engine (Python)         │          │
-│  │  - Anomaly Detection             │          │
-│  │  - Attack Classification         │          │
-│  │  - NLP Log Analysis              │          │
-│  └──────────────────────────────────┘          │
-│                                                 │
-│  ┌──────────────┐                              │
-│  │ Splunk UF    │→ SOC Integration             │
-│  └──────────────┘                              │
-└─────────────────────────────────────────────────┘
-🛠️ Tech Stack
-Backend
-FastAPI - High-performance Python web framework
-Python 3.10+ - Core programming language
-PostgreSQL 15+ - Primary database
-Redis - Caching and rate limiting
-SQLAlchemy - ORM
-Frontend
-Angular - Web application framework
-TypeScript - Type-safe JavaScript
-Chart.js / D3.js - Data visualization
-AI/ML
-scikit-learn - Machine learning algorithms
-TensorFlow/PyTorch - Deep learning (optional)
-XGBoost - Gradient boosting
-NLTK/spaCy - Natural language processing
-DevOps
-OKD/Kubernetes - Container orchestration
-Docker - Containerization
-GitLab CI/CD - Continuous integration
-Helm - Kubernetes package manager
-Monitoring
-Prometheus - Metrics collection
-Grafana - Visualization
-Splunk - Log management and SIEM
-📁 Project Structure
-novaguard/
-├── backend/                    # FastAPI Backend
-│   ├── app/
-│   │   ├── api/               # API Routes
-│   │   │   ├── v1/
-│   │   │   └── dependencies.py
-│   │   ├── core/              # Configuration & Security
-│   │   │   ├── config.py
-│   │   │   ├── security.py
-│   │   │   └── logging.py
-│   │   ├── ml/                # Machine Learning Models
-│   │   │   ├── anomaly_detection.py
-│   │   │   ├── classifier.py
-│   │   │   ├── nlp_analyzer.py
-│   │   │   └── trainer.py
-│   │   ├── waf/               # WAF Core Logic
-│   │   │   ├── rules_engine.py
-│   │   │   ├── request_analyzer.py
-│   │   │   ├── response_handler.py
-│   │   │   └── threat_detector.py
-│   │   ├── db/                # Database Models
-│   │   │   ├── models.py
-│   │   │   └── session.py
-│   │   ├── integrations/      # External Integrations
-│   │   │   ├── splunk.py
-│   │   │   └── apache.py
-│   │   └── main.py
-│   ├── tests/
-│   ├── requirements.txt
-│   └── Dockerfile
-│
-├── frontend/                   # Angular Frontend
-│   ├── src/
-│   │   ├── app/
-│   │   │   ├── dashboard/
-│   │   │   ├── alerts/
-│   │   │   ├── rules/
-│   │   │   ├── analytics/
-│   │   │   └── settings/
-│   │   ├── environments/
-│   │   └── assets/
-│   ├── package.json
-│   └── Dockerfile
-│
-├── ml-engine/                  # ML Service
-│   ├── models/                # Trained Models
-│   ├── training/              # Training Scripts
-│   │   ├── train_anomaly.py
-│   │   └── train_classifier.py
-│   ├── inference/             # Prediction API
-│   └── Dockerfile
-│
-├── apache-module/              # Apache Integration
-│   ├── mod_novaguard.c
-│   └── config/
-│
-├── deployment/                 # Deployment Configs
-│   ├── kubernetes/
-│   │   ├── backend.yaml
-│   │   ├── frontend.yaml
-│   │   ├── postgres.yaml
-│   │   └── redis.yaml
-│   ├── helm/
-│   │   └── novaguard/
-│   └── docker-compose.yml
-│
-├── docs/                       # Documentation
-│   ├── architecture.md
-│   ├── api-specification.yaml
-│   ├── deployment-guide.md
-│   ├── ml-models.md
-│   └── user-manual.md
-│
-├── scripts/                    # Utility Scripts
-│   ├── setup.sh
-│   ├── test.sh
-│   └── deploy.sh
-│
-├── .github/
-│   ├── workflows/
-│   │   ├── ci.yml
-│   │   └── cd.yml
-│   └── ISSUE_TEMPLATE/
-│
-├── .gitignore
-├── LICENSE
-├── README.md
-└── CONTRIBUTING.md
-🚀 Getting Started
-Prerequisites
-Python 3.10+
-Node.js 18+
-PostgreSQL 15+
-Redis 7+
-Docker & Docker Compose
-Quick Start (Development)
-Clone the repository
-bash
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.109-green.svg)](https://fastapi.tiangolo.com/)
+
+**NovaGuard AI** est un pare-feu applicatif web de nouvelle génération qui utilise l'intelligence artificielle pour détecter et bloquer les menaces en temps réel.
+
+---
+
+## 📖 Table des Matières
+
+- [Vue d'ensemble](#-vue-densemble)
+- [Fonctionnalités](#-fonctionnalités)
+- [Architecture](#-architecture)
+- [Installation](#-installation)
+- [Utilisation](#-utilisation)
+- [Technologies](#-technologies)
+- [Développement](#-développement)
+- [Contribution](#-contribution)
+- [Licence](#-licence)
+
+---
+
+## 🎯 Vue d'ensemble
+
+NovaGuard AI remplace les solutions WAF traditionnelles comme ModSecurity en offrant :
+
+- Détection intelligente des menaces via Machine Learning
+- Réduction des faux positifs grâce à l'IA
+- Réponses automatisées aux attaques
+- Interface de monitoring moderne
+- Intégration native avec Apache et Splunk
+
+---
+
+## ✨ Fonctionnalités
+
+### Protection en Temps Réel
+
+- ✅ Détection d'injection SQL
+- ✅ Protection contre XSS (Cross-Site Scripting)
+- ✅ Prévention Path Traversal
+- ✅ Rate Limiting et protection DDoS
+- ✅ Détection d'anomalies par IA
+
+### Intelligence Artificielle
+
+- 🤖 Détection d'anomalies (Isolation Forest, K-means)
+- 🎯 Classification des attaques (Random Forest, XGBoost)
+- 📊 Scoring et priorisation des menaces
+- 🔍 Analyse NLP des logs
+
+### Gestion et Monitoring
+
+- 📈 Dashboard interactif (Angular)
+- 🔧 Création de règles personnalisées
+- 📝 Logs détaillés
+- 🔗 Intégration Splunk UF
+- 📊 Métriques de performance
+
+---
+
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────┐
+│         OKD / Kubernetes            │
+├─────────────────────────────────────┤
+│                                     │
+│  Apache  →  FastAPI  →  PostgreSQL │
+│     ↓           ↓                   │
+│  WAF AI  →  ML Engine               │
+│     ↓                               │
+│  Splunk  ←  Logs                    │
+│                                     │
+└─────────────────────────────────────┘
+```
+
+---
+
+## 🚀 Installation
+
+### Prérequis
+
+- Python 3.10 ou supérieur
+- Node.js 18 ou supérieur
+- PostgreSQL 15 ou supérieur
+- Docker et Docker Compose
+- Git
+
+### Installation Rapide
+
+```bash
+# 1. Cloner le repository
 git clone https://github.com/yourusername/novaguard.git
 cd novaguard
-Setup Backend
-bash
+
+# 2. Lancer avec Docker Compose
+docker-compose up -d
+
+# 3. Accéder aux services
+# Backend API: http://localhost:8000
+# Frontend: http://localhost:4200
+# API Docs: http://localhost:8000/docs
+```
+
+### Installation Manuelle
+
+#### Backend
+
+```bash
 cd backend
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-Setup Database
-bash
-# Create PostgreSQL database
-createdb novaguard
+uvicorn app.main:app --reload
+```
 
-# Run migrations
-alembic upgrade head
-Start Backend
-bash
-uvicorn app.main:app --reload --port 8000
-Setup Frontend
-bash
+#### Frontend
+
+```bash
 cd frontend
 npm install
 ng serve
-Access the Application
-Backend API: http://localhost:8000
-API Docs: http://localhost:8000/docs
-Frontend: http://localhost:4200
-Docker Compose (Recommended)
-bash
+```
+
+#### Base de données
+
+```bash
+createdb novaguard
+cd backend
+alembic upgrade head
+```
+
+---
+
+## 💻 Utilisation
+
+### Démarrage Rapide
+
+```bash
+# Démarrer tous les services
 docker-compose up -d
-📅 Development Roadmap
-Sprint 0 (2 weeks) - Setup ✅
- GitLab repository setup
- CI/CD pipeline configuration
- OKD environment setup
- PostgreSQL database structure
- FastAPI boilerplate
- Angular boilerplate
-Sprint 1-2 (6 weeks) - Core WAF 🚧
- Apache module for request interception
- FastAPI request analysis endpoints
- Basic security rules (SQL injection, XSS, Path Traversal)
- PostgreSQL logging implementation
- Angular dashboard for log visualization
-Sprint 3-4 (6 weeks) - AI Integration
- Attack dataset collection
- Anomaly detection model (Isolation Forest)
- Attack classifier (Random Forest/XGBoost)
- Threat scoring algorithm
- Real-time ML inference integration
-Sprint 5 (3 weeks) - Automation
- Dynamic rules engine
- Automated response system (block/challenge/log)
- NLP-based log analysis
- Custom rule creation interface
-Sprint 6-7 (6 weeks) - Integration & Testing
- Splunk UF integration
- Load testing (JMeter, Locust)
- Security testing (OWASP ZAP)
- Performance optimization
- False positive reduction
-Sprint 8 (3 weeks) - Documentation & Demo
- Complete technical documentation
- Installation guide
- Performance report
- Final presentation
-📚 Documentation
-Detailed documentation is available in the /docs directory:
-Architecture Overview
-API Specification
-Deployment Guide
-ML Models Documentation
-User Manual
-🤝 Contributing
-We welcome contributions! Please see CONTRIBUTING.md for details on:
-Code of Conduct
-Development workflow
-Coding standards
-Pull request process
-Testing requirements
-📊 Performance Metrics
-Target performance goals:
-Latency: < 50ms per request
-Throughput: > 10,000 requests/second
-False Positive Rate: < 1%
-True Positive Detection: > 95%
-Availability: 99.9% uptime
-🔒 Security
-For security concerns, please email: security@novaguard.dev
-Do not open public issues for security vulnerabilities.
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-👥 Team
-Project Lead: [PRODOPS-Pole. Sécurité]
-Technical Support: 459.Prodops-NSS.Operations, 459.prodops-dt
-🙏 Acknowledgments
-Sopra Steria Group for project sponsorship
-Open-source community for tools and libraries
-Security researchers for threat intelligence
-📞 Contact
-Project Website: https://novaguard.dev
-Documentation: https://docs.novaguard.dev
-Issues: https://github.com/yourusername/novaguard/issues
-Built with ❤️ by the NovaGuard Team
+
+# Vérifier le statut
+docker-compose ps
+
+# Voir les logs
+docker-compose logs -f backend
+```
+
+### Accès aux Services
+
+| Service | URL | Description |
+|---------|-----|-------------|
+| Backend API | http://localhost:8000 | API principale |
+| Documentation API | http://localhost:8000/docs | Swagger UI |
+| Frontend | http://localhost:4200 | Dashboard Angular |
+| Base de données | localhost:5432 | PostgreSQL |
+| Redis | localhost:6379 | Cache |
+
+### Tests
+
+```bash
+# Backend
+cd backend
+pytest
+
+# Frontend
+cd frontend
+npm test
+```
+
+---
+
+## 🛠️ Technologies
+
+### Backend
+
+- **FastAPI** - Framework web Python
+- **PostgreSQL** - Base de données
+- **Redis** - Cache et rate limiting
+- **SQLAlchemy** - ORM
+
+### Frontend
+
+- **Angular** - Framework JavaScript
+- **TypeScript** - Langage typé
+- **Chart.js** - Visualisations
+
+### Intelligence Artificielle
+
+- **scikit-learn** - Machine Learning
+- **XGBoost** - Gradient Boosting
+- **NLTK/spaCy** - Traitement du langage
+
+### DevOps
+
+- **Docker** - Conteneurisation
+- **OKD/Kubernetes** - Orchestration
+- **GitLab CI/CD** - Intégration continue
+
+---
+
+## 👨‍💻 Développement
+
+### Structure du Projet
+
+```
+novaguard/
+├── backend/          # API FastAPI
+├── frontend/         # Application Angular
+├── ml-engine/        # Modèles ML
+├── deployment/       # Configs Kubernetes
+├── docs/             # Documentation
+└── docker-compose.yml
+```
+
+### Roadmap
+
+#### Phase 1 - Core WAF (6 semaines)
+- [x] Setup infrastructure
+- [ ] Module Apache
+- [ ] Règles de sécurité basiques
+- [ ] Dashboard initial
+
+#### Phase 2 - Intelligence IA (6 semaines)
+- [ ] Collecte de datasets
+- [ ] Modèles de détection
+- [ ] Classification d'attaques
+- [ ] Intégration temps réel
+
+#### Phase 3 - Automatisation (3 semaines)
+- [ ] Moteur de règles dynamiques
+- [ ] Réponses automatiques
+- [ ] Analyse NLP
+
+#### Phase 4 - Production (6 semaines)
+- [ ] Tests de charge
+- [ ] Intégration Splunk
+- [ ] Documentation finale
+- [ ] Déploiement
+
+---
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues ! Consultez [CONTRIBUTING.md](CONTRIBUTING.md) pour les directives.
+
+### Comment Contribuer
+
+1. Fork le projet
+2. Créer une branche (`git checkout -b feature/AmazingFeature`)
+3. Commit les changements (`git commit -m 'Add AmazingFeature'`)
+4. Push vers la branche (`git push origin feature/AmazingFeature`)
+5. Ouvrir une Pull Request
+
+---
+
+## 📊 Métriques de Performance
+
+Objectifs de performance :
+
+- **Latence** : < 50ms par requête
+- **Débit** : > 10 000 requêtes/seconde
+- **Faux Positifs** : < 1%
+- **Détection** : > 95%
+- **Disponibilité** : 99.9%
+
+---
+
+## 📄 Licence
+
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+---
+
+## 👥 Équipe
+
+- **Chef de Projet** : PRODOPS-Pole Sécurité
+- **Support Technique** : 459.Prodops-NSS.Operations
+
+---
+
+## 📞 Contact
+
+- **Issues** : [GitHub Issues](https://github.com/yourusername/novaguard/issues)
+- **Email** : security@novaguard.dev
+
+---
+
+## 🙏 Remerciements
+
+- Sopra Steria Group pour le sponsoring
+- Communauté open-source
+- Contributeurs et testeurs
+
+---
+
+**Développé avec ❤️ par l'équipe NovaGuard**
