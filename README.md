@@ -8,7 +8,7 @@
 
 ---
 
-##  Table des Matières
+## 📖 Table des Matières
 
 - [Vue d'ensemble](#-vue-densemble)
 - [Fonctionnalités](#-fonctionnalités)
@@ -22,7 +22,7 @@
 
 ---
 
-##  Vue d'ensemble
+## 🎯 Vue d'ensemble
 
 NovaGuard AI remplace les solutions WAF traditionnelles comme ModSecurity en offrant :
 
@@ -34,7 +34,7 @@ NovaGuard AI remplace les solutions WAF traditionnelles comme ModSecurity en off
 
 ---
 
-##  Fonctionnalités
+## ✨ Fonctionnalités
 
 ### Protection en Temps Réel
 
@@ -46,40 +46,152 @@ NovaGuard AI remplace les solutions WAF traditionnelles comme ModSecurity en off
 
 ### Intelligence Artificielle
 
-- Détection d'anomalies (Isolation Forest, K-means)
--  Classification des attaques (Random Forest, XGBoost)
--  Scoring et priorisation des menaces
--  Analyse NLP des logs
+- 🤖 Détection d'anomalies (Isolation Forest, K-means)
+- 🎯 Classification des attaques (Random Forest, XGBoost)
+- 📊 Scoring et priorisation des menaces
+- 🔍 Analyse NLP des logs
 
 ### Gestion et Monitoring
 
--  Dashboard interactif (Angular)
--  Création de règles personnalisées
--  Logs détaillés
--  Intégration Splunk UF
--  Métriques de performance
+- 📈 Dashboard interactif (Angular)
+- 🔧 Création de règles personnalisées
+- 📝 Logs détaillés
+- 🔗 Intégration Splunk UF
+- 📊 Métriques de performance
 
 ---
 
-##  Architecture
+## 🏗️ Architecture
+
+### Vue d'Ensemble Simplifiée
 
 ```
-┌─────────────────────────────────────┐
-│         OKD / Kubernetes            │
-├─────────────────────────────────────┤
-│                                     │
-│  Apache  →  FastAPI  →  PostgreSQL │
-│     ↓           ↓                   │
-│  WAF AI  →  ML Engine               │
-│     ↓                               │
-│  Splunk  ←  Logs                    │
-│                                     │
-└─────────────────────────────────────┘
+Internet
+   ↓
+[Client Web/Mobile]
+   ↓
+┌─────────────────────────────────────────────────────┐
+│                  NOVAGUARD WAF                      │
+│  ┌──────────┐    ┌──────────┐    ┌──────────┐     │
+│  │  Apache  │ → │ Module   │ → │ FastAPI  │     │
+│  │  Serveur │    │   WAF    │    │ Backend  │     │
+│  └──────────┘    └──────────┘    └──────────┘     │
+│                        ↓                            │
+│                  ┌──────────┐                       │
+│                  │ Moteur   │                       │
+│                  │    IA    │                       │
+│                  └──────────┘                       │
+└─────────────────────────────────────────────────────┘
+   ↓                    ↓                ↓
+[Application]    [PostgreSQL]      [Splunk SOC]
+ Protégée         Base de            Monitoring
+                  Données
+```
+
+### Flux de Requête - Étape par Étape
+
+```
+1. CLIENT envoie une requête HTTP
+   │
+   ↓
+2. APACHE reçoit la requête
+   │  (Port 80/443)
+   │
+   ↓
+3. MODULE WAF intercepte
+   │  (mod_novaguard.so)
+   │  • Extrait les données
+   │  • Envoie à FastAPI
+   │
+   ↓
+4. FASTAPI analyse
+   │  (Port 8000)
+   │  ┌─────────────────┐
+   │  │ A. Règles Basic │
+   │  │ B. ML Detection │
+   │  │ C. Scoring      │
+   │  └─────────────────┘
+   │
+   ↓
+5. DÉCISION
+   │
+   ├─→ [BLOQUÉ] → Retour 403
+   │              Log vers Splunk
+   │
+   └─→ [AUTORISÉ] → Passe à l'app
+                     Log vers DB
+```
+
+### Composants Principaux
+
+#### 1️⃣ Apache + Module WAF
+- Intercepte toutes les requêtes HTTP
+- Extrait : URL, Headers, Body, IP Client
+- Premier niveau de filtrage
+
+#### 2️⃣ Backend FastAPI
+- API principale d'analyse
+- Moteur de règles de sécurité
+- Coordination avec le ML Engine
+
+#### 3️⃣ Moteur d'Intelligence Artificielle
+- **Détection d'anomalies** : Isolation Forest, K-means
+- **Classification** : Random Forest, XGBoost
+- **Scoring** : Évaluation de criticité (0-100)
+- **NLP** : Analyse textuelle des logs
+
+#### 4️⃣ Base de Données PostgreSQL
+- Stockage des menaces détectées
+- Règles de sécurité personnalisées
+- Historique des attaques
+- IPs bloquées
+
+#### 5️⃣ Dashboard Angular
+- Monitoring temps réel
+- Gestion des règles
+- Visualisation des alertes
+- Rapports et analytics
+
+#### 6️⃣ Intégration Splunk
+- Collecte centralisée des logs
+- Corrélation avec SOC
+- Alertes avancées
+
+### Exemple : Détection d'Injection SQL
+
+```
+┌─────────────────────────────────────────────────┐
+│  1. REQUÊTE MALVEILLANTE                        │
+│     GET /users?id=1' OR '1'='1                  │
+└─────────────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────────────┐
+│  2. APACHE + MODULE WAF                         │
+│     Intercepte et extrait                       │
+└─────────────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────────────┐
+│  3. FASTAPI - RULES ENGINE                      │
+│     Pattern SQL détecté → Score: 80/100         │
+└─────────────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────────────┐
+│  4. ML ENGINE - CLASSIFICATION                  │
+│     Type: SQL_INJECTION                         │
+│     Confiance: 95% → Score final: 95/100        │
+└─────────────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────────────┐
+│  5. DÉCISION: BLOQUER                           │
+│     • Block IP pendant 15 min                   │
+│     • Retourne 403 Forbidden                    │
+│     • Log dans PostgreSQL + Splunk              │
+└─────────────────────────────────────────────────┘
 ```
 
 ---
 
-##  Installation
+## 🚀 Installation
 
 ### Prérequis
 
@@ -135,7 +247,7 @@ alembic upgrade head
 
 ---
 
-##  Utilisation
+## 💻 Utilisation
 
 ### Démarrage Rapide
 
@@ -174,7 +286,7 @@ npm test
 
 ---
 
-##  Technologies
+## 🛠️ Technologies
 
 ### Backend
 
@@ -203,7 +315,7 @@ npm test
 
 ---
 
-##  Développement
+## 👨‍💻 Développement
 
 ### Structure du Projet
 
@@ -244,7 +356,7 @@ novaguard/
 
 ---
 
-##  Contribution
+## 🤝 Contribution
 
 Les contributions sont les bienvenues ! Consultez [CONTRIBUTING.md](CONTRIBUTING.md) pour les directives.
 
@@ -258,7 +370,7 @@ Les contributions sont les bienvenues ! Consultez [CONTRIBUTING.md](CONTRIBUTING
 
 ---
 
-##  Métriques de Performance
+## 📊 Métriques de Performance
 
 Objectifs de performance :
 
@@ -270,22 +382,20 @@ Objectifs de performance :
 
 ---
 
-## Licence
+## 📄 Licence
 
 Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
 ---
 
-##  Équipe
+## 👥 Équipe
 
 - **Chef de Projet** : PRODOPS-Pole Sécurité
 - **Support Technique** : 459.Prodops-NSS.Operations
 
 ---
 
-
-
-## Remerciements
+## 🙏 Remerciements
 
 - Sopra Steria Group pour le sponsoring
 - Communauté open-source
@@ -294,5 +404,3 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 ---
 
 **Développé avec ❤️ par l'équipe NovaGuard**
-
-
