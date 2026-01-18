@@ -283,12 +283,7 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ---
 
-## 📞 Contact
 
-- **Issues** : [GitHub Issues](https://github.com/yourusername/novaguard/issues)
-- **Email** : security@novaguard.dev
-
----
 
 ## 🙏 Remerciements
 
@@ -299,3 +294,4 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 ---
 
 **Développé avec ❤️ par l'équipe NovaGuard**
+
