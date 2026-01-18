@@ -356,7 +356,7 @@ novaguard/
 
 ---
 
-## 🤝 ontribution
+##  contribution
 
 Les contributions sont les bienvenues ! Consultez [CONTRIBUTING.md](CONTRIBUTING.md) pour les directives.
 
@@ -404,4 +404,5 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 ---
 
 **Développé avec ❤️ par l'équipe NovaGuard**
+
 
