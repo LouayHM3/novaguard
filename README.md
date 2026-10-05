@@ -6,6 +6,14 @@
 
 **NovaGuard AI** est un pare-feu applicatif web de nouvelle génération qui utilise l'intelligence artificielle pour détecter et bloquer les menaces en temps réel.
 
+
+## Rapport détaillé
+
+[Consulter le rapport NovaGuard AI (PDF, 79 pages)](docs/reports/WAF_Intelligent_NovaGuardAI.pdf)
+
+Rapport de projet de fin d’année II à l’ENIT, année universitaire 2025/2026 : contexte, architecture, agent ModSecurity, API FastAPI, interface Angular, assistance IA/RAG, tests et limites de l’évaluation.
+
+
 ---
 
 ##  Table des Matières
